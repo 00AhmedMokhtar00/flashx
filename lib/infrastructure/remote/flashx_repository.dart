@@ -1,11 +1,15 @@
-import 'package:flashx/application/next_launch/next_launch_bloc.dart';
-
-import '../../application/past_launches/past_launches_bloc.dart';
+import 'package:flashx/application/blocs.dart';
+import 'package:flashx/application/launch_information/launchpad/launchpad_bloc.dart';
 import 'base_configurations/flashx_api.dart';
 import 'package:flashx/domain/models.dart';
 
 abstract class BaseFlashXRepository{
-  Future<PastLaunchesState> getPastLaunches();
+  Future<PastLaunchesState> get getPastLaunches;
+  Future<NextLaunchState> get getNextLaunch;
+  Future<PayloadsState> get getPayloads;
+
+  Future<LaunchPadState> getLaunchPadInformation(String launchPadId);
+  Future<RocketState> getRocketInformation(String rocketId);
 }
 
 class FlashXRepository{
@@ -39,6 +43,47 @@ class FlashXRepository{
     return nextLaunchState;
   }
 
+  Future<PayloadsState> get getPayloads async{
+    PayloadsState payloadsState;
+    try{
+      final payloadsResponseBody = await FlashXAPI.getPayloads;
 
+      List<Payload> payloads =
+      payloadsResponseBody.map((e) => Payload.fromJson(e)).cast<Payload>().toList();
+
+      payloadsState = PayloadsLoadedSuccessfully(payloads: payloads);
+    }catch(errorMessage){
+      payloadsState = PayloadsLoadedFailure(errorMessage.toString());
+    }
+    return payloadsState;
+  }
+
+  Future<RocketState> getRocketInformation(String rocketId) async{
+    RocketState rocketState;
+    try{
+      final rocketInformationResponseBody = await FlashXAPI.getRocketById(rocketId);
+
+      Rocket rocketInformation = Rocket.fromJson(rocketInformationResponseBody);
+
+      rocketState = RocketLoadedSuccessfully(rocket: rocketInformation);
+    }catch(errorMessage){
+      rocketState = RocketLoadedFailure(errorMessage.toString());
+    }
+    return rocketState;
+  }
+
+  Future<LaunchPadState> getLaunchPadInformation(String launchPadId) async{
+    LaunchPadState launchPadState;
+    try{
+      final launchPadInformationResponseBody = await FlashXAPI.getLaunchpadById(launchPadId);
+
+      Launchpad launchPadInformation = Launchpad.fromJson(launchPadInformationResponseBody);
+
+      launchPadState = LaunchPadLoadedSuccessfully(launchPad: launchPadInformation);
+    }catch(errorMessage){
+      launchPadState = LaunchPadLoadedFailure(errorMessage.toString());
+    }
+    return launchPadState;
+  }
 
 }

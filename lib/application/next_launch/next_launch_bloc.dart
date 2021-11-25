@@ -14,7 +14,7 @@ class NextLaunchBloc extends Bloc<NextLaunchEvent, NextLaunchState> {
       NextLaunchEvent event,
       ) async* {
     yield const NextLaunchLoading();
-    if(event is NextLaunchStartedEvent){
+    if(event is NextLaunchCalled){
       yield await flashXRepository.getNextLaunch;
     }
   }

@@ -14,7 +14,7 @@ class PastLaunchesBloc extends Bloc<PastLaunchesEvent, PastLaunchesState> {
       PastLaunchesEvent event,
       ) async* {
     yield const PastLaunchesLoading();
-    if(event is PastLaunchesStartedEvent){
+    if(event is PastLaunchesCalled){
       yield await flashXRepository.getPastLaunches;
     }
   }

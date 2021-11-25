@@ -16,9 +16,15 @@ class ApplicationWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create:(_) =>
-          PastLaunchesBloc()..add(PastLaunchesStartedEvent()), lazy: false,),
+            PastLaunchesBloc()..add(PastLaunchesCalled()), lazy: false),
         BlocProvider(create:(_) =>
-          NextLaunchBloc()..add(NextLaunchStartedEvent()), lazy: false,),
+            NextLaunchBloc()..add(NextLaunchCalled()), lazy: false),
+        BlocProvider(create:(_) =>
+            RocketBloc()),
+        BlocProvider(create:(_) =>
+            PayloadsBloc()..add(PayloadsCalled()), lazy: false),
+        BlocProvider(create:(_) =>
+            LaunchPadBloc()),
       ],
 
          child: MaterialApp(
