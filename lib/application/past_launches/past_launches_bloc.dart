@@ -1,6 +1,6 @@
-import 'package:flashx/domain/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flashx/domain/models.dart';
 import '../../infrastructure/remote/flashx_repository.dart';
 
 part 'past_launches_event.dart';
@@ -15,7 +15,6 @@ class PastLaunchesBloc extends Bloc<PastLaunchesEvent, PastLaunchesState> {
       ) async* {
     yield const PastLaunchesLoading();
     if(event is PastLaunchesStartedEvent){
-      //yield const PastLaunchesLoading();
       yield await flashXRepository.getPastLaunches();
     }
   }

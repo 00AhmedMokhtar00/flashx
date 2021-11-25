@@ -1,9 +1,9 @@
-import 'package:flashx/application/past_launches/past_launches_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flashx/application/blocs.dart';
 import 'helpers/presentation_helpers.dart';
 import 'routes/router.dart';
 import 'theme/themes.dart';
@@ -13,9 +13,14 @@ class ApplicationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => PastLaunchesBloc()..add(PastLaunchesStartedEvent()),
-        lazy: false,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create:(_) =>
+          PastLaunchesBloc()..add(PastLaunchesStartedEvent()), lazy: false,),
+        BlocProvider(create:(_) =>
+          NextLaunchBloc()..add(NextLaunchStartedEvent()), lazy: false,),
+      ],
+
          child: MaterialApp(
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
