@@ -17,6 +17,7 @@ dependencies:
   responsive_framework: ^0.1.5
   flutter_bloc: ^7.3.2
   shared_preferences: ^2.0.8
+  http: ^0.13.4
   #device_preview: ^0.8.0
 
 

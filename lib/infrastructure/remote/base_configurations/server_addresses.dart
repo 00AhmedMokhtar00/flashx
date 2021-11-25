@@ -1,8 +1,10 @@
+part of 'flashx_api.dart';
+
 class ServerAddresses {
 
   static const String _baseUrl = 'https://api.spacexdata.com/v4/';
 
-
+  /// Endpoints
   static const String _nextLaunch    = 'launches/next';
   static const String _pastLaunches  = 'launches/past';
   static const String _payloads      = "payloads";
