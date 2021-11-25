@@ -10,7 +10,7 @@ abstract class BaseFlashXRepository{
 
 class FlashXRepository{
 
-  Future<PastLaunchesState> getPastLaunches()async{
+  Future<PastLaunchesState> get getPastLaunches async{
     PastLaunchesState pastLaunchesState;
     try{
       final pastLaunchesResponseBody = await FlashXAPI.getPastLaunches;
@@ -25,7 +25,7 @@ class FlashXRepository{
     return pastLaunchesState;
   }
 
-  Future<NextLaunchState> getNextLaunch()async{
+  Future<NextLaunchState> get getNextLaunch async{
     NextLaunchState nextLaunchState;
     try{
       final nextLaunchResponseBody = await FlashXAPI.getNextLaunch;
@@ -38,4 +38,7 @@ class FlashXRepository{
     }
     return nextLaunchState;
   }
+
+
+
 }
