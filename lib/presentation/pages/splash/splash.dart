@@ -5,24 +5,11 @@ import 'widgets/splash_widget.dart';
 
 class Splash extends StatelessWidget {
   static const String routeName = "/splash";
-  Splash({Key? key}) : super(key: key);
 
-  Widget view = const SplashWidget();
+  const Splash({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    return view;
-
-    // return BlocListener( // TODO
-    //   listener: (context, state) {
-    //     // if(state is OrdersLoadedSuccessfully){
-    //     //   Navigator.pushReplacementNamed(context, HomePage.routeName);
-    //     // } else if(state is OrdersLoadedFailure){
-    //     //   view = const ServerErrorWidget();
-    //     // }
-    //   },
-    //   child: view,
-    // );
+    return const SplashWidget();
   }
 }
