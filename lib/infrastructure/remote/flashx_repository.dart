@@ -22,6 +22,8 @@ class FlashXRepository{
       List<Launch> pastLaunches =
       pastLaunchesResponseBody.map((e) => Launch.fromJson(e)).cast<Launch>().toList();
 
+      pastLaunches = pastLaunches.reversed.toList();
+
       pastLaunchesState = PastLaunchesLoadedSuccessfully(pastLaunches: pastLaunches);
     }catch(errorMessage){
       pastLaunchesState = PastLaunchesLoadedFailure(errorMessage.toString());

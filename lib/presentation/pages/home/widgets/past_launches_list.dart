@@ -13,7 +13,7 @@ class PastLaunchesList extends StatelessWidget {
         }else if(state is PastLaunchesLoadedSuccessfully) {
           return SliverAnimatedList(
               key: _listKey,
-              initialItemCount: 15,
+              initialItemCount: state.pastLaunches.length,
               itemBuilder: (context, index, animation) {
                 return ListTile(
                   contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
