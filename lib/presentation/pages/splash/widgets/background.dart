@@ -14,7 +14,7 @@ class Background extends StatelessWidget {
           image: DecorationImage(
             fit: BoxFit.fill,
             colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.darken),
+                Colors.black.withOpacity(0.4), BlendMode.darken),
             image: const AssetImage(
                 PresentationAssetPath.SPLASH_BACKGROUND,
             ),

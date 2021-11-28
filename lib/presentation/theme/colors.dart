@@ -5,6 +5,7 @@ class ApplicationColor{
   static const Color white = Color(0xffffffff);
   static const Color black = Color(0xff000000);
   static const Color lightGrey  = Color(0xfff2f2f2);
+  static const Color lightGreen  = Color(0xfff2f2f2);
 
 
   static const Color primaryColor = black;

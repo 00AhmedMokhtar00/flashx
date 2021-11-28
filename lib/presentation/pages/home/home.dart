@@ -1,12 +1,9 @@
-import 'package:flashx/application/blocs.dart';
-import 'package:flashx/presentation/helpers/presentation_helpers.dart';
-import 'package:flashx/presentation/pages/widgets/progress_indicators/application_progress_indicator.dart';
-import 'package:flashx/presentation/theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flashx/presentation/theme/themes.dart';
+import 'package:flashx/application/blocs.dart';
 import 'widgets/widgets.dart';
-
 
 class Home extends StatefulWidget {
   static const String routeName = "/home";
@@ -27,7 +24,7 @@ class _HomeState extends State<Home> {
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            const NextLaunchWidget(),
+            NextLaunchWidget(),
 
             const PastLaunchesHeader(),
 

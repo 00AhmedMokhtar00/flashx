@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 
 import 'fonts.dart';
 
-class ApplicationTextStyles{
+class ApplicationStyles{
   static TextStyle sloganTextStyle = TextStyle(
     fontSize: ApplicationFont.largeSize,
     color: ApplicationTheme.currentTheme.colorScheme.secondary
+  );
+
+  static BorderRadiusGeometry borderRadius = BorderRadius.circular(
+      16.0
   );
 }

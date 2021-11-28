@@ -21,7 +21,9 @@ class ApplicationFont{
   /// Fields with this size =>
   static const double xLargeSize = 20.0;
   /// Fields with this size =>
-  static const double pageTitleSize = 26.0;
+  static const double xxLargeSize = 26.0;
+  /// Fields with this size =>
+  static const double pageTitleSize = 30.0;
 
 
 }

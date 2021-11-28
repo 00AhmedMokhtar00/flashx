@@ -18,6 +18,7 @@ dependencies:
   flutter_bloc: ^7.3.2
   shared_preferences: ^2.0.8
   http: ^0.13.4
+  flutter_countdown_timer: ^4.1.0
   #device_preview: ^0.8.0
 
 
@@ -43,8 +44,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/flashX.png
-    - assets/splash-background.jpg
+    - assets/
 
   fonts:
     - family: D-din
