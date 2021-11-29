@@ -21,3 +21,13 @@ class PayloadsLoadedFailure extends PayloadsState {
   String errorMessage;
   PayloadsLoadedFailure(this.errorMessage);
 }
+
+class LaunchPayloadsLoadedSuccessfully extends PayloadsState {
+  List<Payload> payloads;
+  LaunchPayloadsLoadedSuccessfully({required this.payloads});
+}
+
+class LaunchPayloadsLoadedFailure extends PayloadsState {
+  String errorMessage;
+  LaunchPayloadsLoadedFailure(this.errorMessage);
+}

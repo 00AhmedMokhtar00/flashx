@@ -18,7 +18,12 @@ class PastLaunchesList extends StatelessWidget {
               itemBuilder: (context, index, animation) {
                 return PastLaunchItem(
                   launch: state.pastLaunches[index],
-                  onTap: (){},
+                  onTap: () {
+                    BlocProvider.of<RocketBloc>(context).add(RocketCalled(state.pastLaunches[index].rocketId));
+                    BlocProvider.of<LaunchPadBloc>(context).add(LaunchPadCalled(state.pastLaunches[index].launchpadId));
+                    //BlocProvider.of<PayloadsBloc>(context).add(PayloadsCalled());
+                    Navigator.pushNamed(context, LaunchDetails.routeName, arguments: state.pastLaunches[index]);
+                  },
                 );
               }
           );

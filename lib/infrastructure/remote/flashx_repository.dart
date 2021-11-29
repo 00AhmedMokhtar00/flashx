@@ -54,6 +54,8 @@ class FlashXRepository{
       List<Payload> payloads =
       payloadsResponseBody.map((e) => Payload.fromJson(e)).cast<Payload>().toList();
 
+      LocalDatabaseManager.payloads = payloads;
+
       payloadsState = PayloadsLoadedSuccessfully(payloads: payloads);
     }catch(errorMessage){
       payloadsState = PayloadsLoadedFailure(errorMessage.toString());
@@ -100,5 +102,20 @@ class FlashXRepository{
     }
     return pastLaunchesState;
   }
+
+  Future<PayloadsState> getLaunchPayloads(Launch launch) async{
+    PayloadsState payloadsState;
+    try{
+      await Future.delayed(const Duration(seconds: 1));
+      List<Payload> launchPayloads = LocalDatabaseManager.payloads.where((payload) => launch.payloadsId.contains(payload.id)).toList();
+
+      payloadsState = LaunchPayloadsLoadedSuccessfully(payloads: launchPayloads);
+    }catch(errorMessage){
+      payloadsState = LaunchPayloadsLoadedFailure(errorMessage.toString());
+    }
+    return payloadsState;
+  }
+
+
 
 }

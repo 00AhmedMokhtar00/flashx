@@ -16,6 +16,8 @@ class PayloadsBloc extends Bloc<PayloadsEvent, PayloadsState> {
     yield const PayloadsLoading();
     if(event is PayloadsCalled){
       yield await flashXRepository.getPayloads;
+    }else if(event is LaunchPayloadsCalled){
+      yield await flashXRepository.getLaunchPayloads(event.launch);
     }
   }
 }

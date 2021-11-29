@@ -26,3 +26,4 @@ class PastLaunchesFilteredSuccessfully extends PastLaunchesState {
   List<Launch> filteredPastLaunches;
   PastLaunchesFilteredSuccessfully({required this.filteredPastLaunches});
 }
+

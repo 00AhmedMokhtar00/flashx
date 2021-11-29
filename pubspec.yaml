@@ -21,6 +21,7 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   intl: ^0.17.0
   url_launcher: ^6.0.15
+  youtube_player_flutter: ^8.0.0
   #device_preview: ^0.8.0
 
 

@@ -113,7 +113,7 @@ class Launch{
     fairings = Fairings.fromJson(json['fairings']??{});
     smallImage = json['links']["patch"]["small"]??"";
     largeImage = json['links']["patch"]["large"]??"";
-    webCast = json["webcast"]??"";
+    webCast = json["links"]["youtube_id"]??"";
     date = json["date_unix"] == null? -1 : (json["date_unix"] + _calculateDatePrecision(json["date_precision"]??"")) * 1000; // as milliseconds
     datePrecision = _calculateDatePrecision(json["date_precision"]??"");
     rocketId = json["rocket"]??"";

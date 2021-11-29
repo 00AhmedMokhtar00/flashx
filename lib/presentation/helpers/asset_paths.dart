@@ -17,4 +17,5 @@ class PresentationAssetPath{
   static const String BACKGROUND5_GIF = "assets/5.gif";
 
 
+  static const String ROCKET_PLACEHOLDER = "https://www.iconsdb.com/icons/preview/white/rocket-xxl.png";
 }

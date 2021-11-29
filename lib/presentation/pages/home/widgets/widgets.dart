@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flashx/domain/models.dart';
 import 'package:flashx/presentation/helpers/helpers.dart';
 import 'package:flashx/presentation/pages/home/widgets/filter_button.dart';
+import 'package:flashx/presentation/pages/launch_details/launch_details.dart';
 import 'package:flashx/presentation/theme/colors.dart';
 import 'package:flashx/presentation/theme/fonts.dart';
 import 'package:flashx/presentation/theme/styles.dart';
