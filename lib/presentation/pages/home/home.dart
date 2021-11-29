@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flashx/presentation/theme/themes.dart';
-import 'package:flashx/application/blocs.dart';
+import '../../../application/blocs.dart';
+import '../../theme/themes.dart';
 import 'widgets/widgets.dart';
 
 class Home extends StatefulWidget {
   static const String routeName = "/home";
-   Home({Key? key}) : super(key: key);
+   const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();

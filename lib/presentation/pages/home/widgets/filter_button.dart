@@ -1,11 +1,12 @@
-import 'package:flashx/infrastructure/local/manager.dart';
-import 'package:flashx/presentation/theme/colors.dart';
-import 'package:flashx/presentation/theme/styles.dart';
-import 'package:flashx/presentation/theme/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../application/past_launches/past_launches_bloc.dart';
 import 'package:intl/intl.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../application/past_launches/past_launches_bloc.dart';
+import '../../../../infrastructure/local/manager.dart';
+import '../../../theme/styles.dart';
+import '../../../theme/themes.dart';
 
 class AnimatedFab extends StatefulWidget {
   const AnimatedFab({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class AnimatedFab extends StatefulWidget {
 
 class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStateMixin{
   int fromDate = 0, toDate = 0;
-  String fd1 = "", fd2 = "";
+  String fromDateString = "", toDateString = "";
   bool centered = false;
   final double expandedWidth = 230.0;
   final double hiddenWidth = 22.0;
@@ -28,7 +29,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
     super.initState();
     _animationController = AnimationController(
         vsync: this,
-        duration: const Duration(milliseconds: 500)
+        duration: const Duration(milliseconds: 250)
     );
     _colorAnimation = ColorTween(
         begin: Colors.black87,
@@ -96,8 +97,8 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
     if (_animationController.isCompleted) {
       _animationController.reverse();
       centered = false;
-      fd1 = "";
-      fd2 = "";
+      fromDateString = "";
+      toDateString = "";
       PastLaunchesState pastLaunchesState = BlocProvider.of<PastLaunchesBloc>(context).state;
       if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
         BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesCalled());
@@ -133,7 +134,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 height: double.infinity,
-                alignment: fd1.isNotEmpty?Alignment.centerLeft:Alignment.center,
+                alignment: fromDateString.isNotEmpty?Alignment.centerLeft:Alignment.center,
 
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -141,9 +142,9 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
                   borderRadius: ApplicationStyles.leftBorderRadius
                 ),
                 child: Text(
-                  fd1.isEmpty?"From":fd1,
+                  fromDateString.isEmpty?"From":fromDateString,
                   style: TextStyle(
-                    fontSize: fd1.isEmpty?16.0:12.0,
+                    fontSize: fromDateString.isEmpty?16.0:12.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold
                   ),
@@ -154,11 +155,11 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
 
           Expanded(
             child: InkWell(
-              onTap: fd1.isNotEmpty?onToFilterButtonTapped:null,
+              onTap: fromDateString.isNotEmpty?onToFilterButtonTapped:null,
               child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   height: double.infinity,
-                  alignment: fd2.isNotEmpty?Alignment.centerRight:Alignment.center,
+                  alignment: toDateString.isNotEmpty?Alignment.centerRight:Alignment.center,
 
                   decoration: BoxDecoration(
                       color: ApplicationTheme.currentTheme.primaryColor,
@@ -166,9 +167,9 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
                       borderRadius: ApplicationStyles.rightBorderRadius
                   ),
                   child: Text(
-                    fd2.isEmpty?"To":fd2,
+                    toDateString.isEmpty?"To":toDateString,
                     style: TextStyle(
-                        fontSize: fd2.isEmpty?16.0:12.0,
+                        fontSize: toDateString.isEmpty?16.0:12.0,
                         color: ApplicationTheme.currentTheme.colorScheme.secondary,
                         fontWeight: FontWeight.bold
                     ),
@@ -192,8 +193,8 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
     if (picked != null) {
       setState(() {
         fromDate = picked.millisecondsSinceEpoch;
-        fd1 = DateFormat("dd MMM, yyyy").format(picked);
-        fd2 = "";
+        fromDateString = DateFormat("dd MMM, yyyy").format(picked);
+        toDateString = "";
         toDate = 0;
       });
     }
@@ -209,7 +210,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
 
     if (picked != null) {
       toDate = picked.millisecondsSinceEpoch;
-      fd2 = DateFormat("dd MMM, yyyy").format(picked);
+      toDateString = DateFormat("dd MMM, yyyy").format(picked);
 
       PastLaunchesState pastLaunchesState = BlocProvider.of<PastLaunchesBloc>(context).state;
       if(pastLaunchesState is PastLaunchesLoadedSuccessfully){

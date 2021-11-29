@@ -14,20 +14,20 @@ class ApplicationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create:(_) =>
-            PastLaunchesBloc()..add(PastLaunchesCalled()), lazy: false),
-        BlocProvider(create:(_) =>
-            NextLaunchBloc()..add(NextLaunchCalled()), lazy: false),
-        BlocProvider(create:(_) =>
-            RocketBloc()),
-        BlocProvider(create:(_) =>
-            PayloadsBloc()..add(PayloadsCalled()), lazy: false),
-        BlocProvider(create:(_) =>
-            LaunchPadBloc()),
-      ],
-
-         child: MaterialApp(
+        providers: [
+          BlocProvider(
+              create: (_) => PastLaunchesBloc()..add(PastLaunchesCalled()),
+              lazy: false),
+          BlocProvider(
+              create: (_) => NextLaunchBloc()..add(NextLaunchCalled()),
+              lazy: false),
+          BlocProvider(create: (_) => RocketBloc()),
+          BlocProvider(
+              create: (_) => PayloadsBloc()..add(PayloadsCalled()),
+              lazy: false),
+          BlocProvider(create: (_) => LaunchPadBloc()),
+        ],
+        child: MaterialApp(
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           title: ApplicationTextValue.APP_NAME,
@@ -42,11 +42,9 @@ class ApplicationWidget extends StatelessWidget {
                 const ResponsiveBreakpoint.autoScale(800, name: TABLET),
                 const ResponsiveBreakpoint.autoScale(1000, name: TABLET),
               ],
-              background: Container(color: const Color(0xFF000000)
-              )
-          ),
+              background: Container(color: const Color(0xFF000000))),
           initialRoute: AppRouter.initialRoute,
           routes: AppRouter.routes,
-    ));
-      }
+        ));
+  }
 }

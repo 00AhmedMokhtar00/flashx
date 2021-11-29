@@ -1,22 +1,3 @@
-
-/*
-{
-
-
-
-        "flickr_images": [
-            "https://imgur.com/DaCfMsj.jpg",
-            "https://imgur.com/azYafd8.jpg"
-        ],
-        "name": "Falcon 1",
-        "active": false,
-        "cost_per_launch": 6700000,
-        "success_rate_pct": 40,
-        "wikipedia": "https://en.wikipedia.org/wiki/Falcon_1",
-        "description": "The Falcon 1 was an expendable launch system privately developed and manufactured by SpaceX during 2006-2009. On 28 September 2008, Falcon 1 became the first privately-developed liquid-fuel launch vehicle to go into orbit around the Earth.",
-        "id": "5e9d0d95eda69955f709d1eb"
-    },
- */
 class Rocket{
   late final List<String> images;
   late final String name;

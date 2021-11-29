@@ -1,14 +1,3 @@
-/*
-{
-        "images": {
-            "large": [
-                "https://i.imgur.com/KHBk6jO.png"
-            ]
-        },
-        "id": "5e9e3032383ecb267a34e7c7"
-    },
- */
-
 
 class Launchpad {
   late final String largeImage;

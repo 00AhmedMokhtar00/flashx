@@ -1,9 +1,7 @@
 import 'package:flashx/application/blocs.dart';
-import 'package:flashx/application/launch_information/rocket/rocket_bloc.dart';
 import 'package:flashx/domain/models.dart';
 import 'package:flashx/presentation/helpers/asset_paths.dart';
 import 'package:flashx/presentation/helpers/screen_size.dart';
-import 'package:flashx/presentation/theme/styles.dart';
 import 'package:flashx/presentation/theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

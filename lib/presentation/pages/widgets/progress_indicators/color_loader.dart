@@ -5,9 +5,11 @@ class ColorLoader extends StatefulWidget {
   final Color color2;
   final Color color3;
 
-  const ColorLoader({ this.color1 = Colors.black,
-        this.color2 = Colors.white,
-        this.color3 = Colors.white60});
+  const ColorLoader({
+    this.color1 = Colors.black,
+    this.color2 = Colors.white,
+    this.color3 = Colors.white60
+  });
 
   @override
   _ColorLoaderState createState() => _ColorLoaderState();
@@ -35,14 +37,14 @@ class _ColorLoaderState extends State<ColorLoader> with TickerProviderStateMixin
         duration: const Duration(milliseconds: 2000), vsync: this);
 
     animation1 = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: controller1, curve: Interval(0.0, 1.0, curve: Curves.linear)));
+        parent: controller1, curve: const Interval(0.0, 1.0, curve: Curves.linear)));
 
     animation2 = Tween<double>(begin: -1.0, end: 0.0).animate(CurvedAnimation(
-        parent: controller2, curve: Interval(0.0, 1.0, curve: Curves.easeIn)));
+        parent: controller2, curve: const Interval(0.0, 1.0, curve: Curves.easeIn)));
 
     animation3 = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: controller3,
-        curve: Interval(0.0, 1.0, curve: Curves.decelerate)));
+        curve: const Interval(0.0, 1.0, curve: Curves.decelerate)));
 
     controller1.repeat();
     controller2.repeat();
@@ -107,7 +109,7 @@ class Arc1Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint p1 = new Paint()
+    Paint p1 = Paint()
       ..color = color
       ..strokeWidth = 2.0
       ..strokeCap = StrokeCap.round
@@ -133,7 +135,7 @@ class Arc2Painter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint p2 = new Paint()
+    Paint p2 = Paint()
       ..color = color
       ..strokeWidth = 2.0
       ..strokeCap = StrokeCap.round

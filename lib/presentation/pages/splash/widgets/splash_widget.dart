@@ -20,7 +20,7 @@ class SplashWidget extends StatelessWidget {
       body: BlocListener<NextLaunchBloc, NextLaunchState>(
         listener: (_, state){
           if(state is !NextLaunchLoading){
-            Future.delayed(const Duration(milliseconds: 800)).then((_) => Navigator.pushReplacementNamed(context, Home.routeName));
+            Future.delayed(const Duration(seconds: 1)).then((_) => Navigator.pushReplacementNamed(context, Home.routeName));
           }
         },
         child: Stack(

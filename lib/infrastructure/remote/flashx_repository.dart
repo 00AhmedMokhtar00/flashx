@@ -1,8 +1,7 @@
 import 'package:flashx/application/blocs.dart';
-import 'package:flashx/application/launch_information/launchpad/launchpad_bloc.dart';
-import 'package:flashx/infrastructure/local/manager.dart';
 import 'base_configurations/flashx_api.dart';
 import 'package:flashx/domain/models.dart';
+import '../local/manager.dart';
 
 abstract class BaseFlashXRepository{
   Future<PastLaunchesState> get getPastLaunches;
@@ -11,6 +10,8 @@ abstract class BaseFlashXRepository{
 
   Future<LaunchPadState> getLaunchPadInformation(String launchPadId);
   Future<RocketState> getRocketInformation(String rocketId);
+  Future<PastLaunchesState> getPastLaunchesFilteredByTwoDates(int fromDate, int toDate, List<Launch> pastLaunches);
+  Future<PayloadsState> getLaunchPayloads(Launch launch);
 }
 
 class FlashXRepository{

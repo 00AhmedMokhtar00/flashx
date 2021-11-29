@@ -1,24 +1,3 @@
-/*
-{
-        "name": "FalconSAT-2",
-        "type": "Satellite",
-        "reused": false,
-        "launch": "5eb87cd9ffd86e000604b32a",
-        "customers": [
-            "DARPA"
-        ],
-        "nationalities": [
-            "United States"
-        ],
-        "manufacturers": [
-            "SSTL"
-        ],
-        "mass_kg": 20,
-        "mass_lbs": 43,
-        "orbit": "LEO",
-        "id": "5eb0e4b5b6c3bb0006eeb1e1"
-    },
- */
 
 class Payload{
   late final String name;
@@ -60,6 +39,4 @@ class Payload{
     orbit = json['orbit']??"";
     id = json['id']??"";
   }
-
-
 }

@@ -8,8 +8,8 @@ class AppRouter{
   static const String initialRoute = Splash.routeName;
 
   static Map<String, WidgetBuilder> routes = {
-    Splash.routeName: (context) => const Splash(),
-    Home.routeName: (context) => Home(),
-    LaunchDetails.routeName: (context) => LaunchDetails(),
+    Splash.routeName:        (context) => const Splash(),
+    Home.routeName:          (context) => const Home(),
+    LaunchDetails.routeName: (context) => const LaunchDetails(),
   };
 }
