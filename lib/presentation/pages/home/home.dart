@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            NextLaunchWidget(),
+            const NextLaunchWidget(),
             PastLaunchesList(),
           ],
         ),

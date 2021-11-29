@@ -2,6 +2,7 @@ part of 'widgets.dart';
 
 class PastLaunchesList extends StatelessWidget {
   final GlobalKey<SliverAnimatedListState> _listKey = GlobalKey<SliverAnimatedListState>();
+  final GlobalKey<SliverAnimatedListState> _filteredListKey = GlobalKey<SliverAnimatedListState>();
   PastLaunchesList({Key? key}) : super(key: key);
 
   @override
@@ -17,6 +18,18 @@ class PastLaunchesList extends StatelessWidget {
               itemBuilder: (context, index, animation) {
                 return PastLaunchItem(
                   launch: state.pastLaunches[index],
+                  onTap: (){},
+                );
+              }
+          );
+        }else if(state is PastLaunchesFilteredSuccessfully) {
+          return SliverAnimatedList(
+              key: _filteredListKey,
+              initialItemCount: state.filteredPastLaunches.length,
+              itemBuilder: (context, index, animation) {
+                print(index);
+                return PastLaunchItem(
+                  launch: state.filteredPastLaunches[index],
                   onTap: (){},
                 );
               }

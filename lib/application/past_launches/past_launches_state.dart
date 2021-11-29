@@ -21,3 +21,8 @@ class PastLaunchesLoadedFailure extends PastLaunchesState {
   String errorMessage;
   PastLaunchesLoadedFailure(this.errorMessage);
 }
+
+class PastLaunchesFilteredSuccessfully extends PastLaunchesState {
+  List<Launch> filteredPastLaunches;
+  PastLaunchesFilteredSuccessfully({required this.filteredPastLaunches});
+}

@@ -10,10 +10,6 @@ class Helpers{
       Colors.primaries[Random().nextInt(Colors.primaries.length)];
 
   static Future<void> launchURL(String url) async{
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    if (!await launch(url)) throw 'Could not launch $url';
   }
 }

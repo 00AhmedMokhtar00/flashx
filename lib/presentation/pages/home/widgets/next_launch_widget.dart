@@ -1,12 +1,17 @@
 part of 'widgets.dart';
 
 class NextLaunchWidget extends StatelessWidget {
-  NextLaunchWidget({Key? key}) : super(key: key);
+  const NextLaunchWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Center(child: Image.asset(PresentationAssetPath.LOGO, width: ApplicationScreenSize.widthOf(context) * 0.4)),
+      title: Center(
+          child: Image.asset(
+              PresentationAssetPath.LOGO,
+              width: ApplicationScreenSize.widthOf(context) * 0.4
+          )
+      ),
       pinned: true,
       stretch: true,
       forceElevated: true,
@@ -19,10 +24,13 @@ class NextLaunchWidget extends StatelessWidget {
         ],
         background: Container(
           decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30)
+              )
+          ),
           child: BlocBuilder<NextLaunchBloc, NextLaunchState>(
               builder: (context, state) {
-
                 if(state is NextLaunchLoading){
                   return const Center(child: ApplicationLoader.colorApplicationLoader);
                 }else if(state is NextLaunchLoadedSuccessfully){
@@ -35,7 +43,6 @@ class NextLaunchWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                           color: Colors.black.withOpacity(0.6),
                           colorBlendMode: BlendMode.darken,
-
                         ),
                       ),
                       Align(
@@ -48,7 +55,7 @@ class NextLaunchWidget extends StatelessWidget {
                         ),
                       ),
                       Align(
-                        alignment: const Alignment(0.0, 0.84),
+                        alignment: const Alignment(0.0, 0.82),
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Row(
@@ -61,13 +68,13 @@ class NextLaunchWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              InkWell(
+                              GestureDetector(
                                 onTap: () => Helpers.launchURL(state.nextLaunch.wiki),
-                                child: const CircleAvatar(
-                                  backgroundColor: Colors.pinkAccent,
+                                child: CircleAvatar(
+                                  backgroundColor: ApplicationTheme.currentTheme.primaryColor,
                                   child: Icon(
                                     Icons.article_outlined,
-                                    color: Colors.white,
+                                    color: ApplicationTheme.currentTheme.colorScheme.secondary,
                                   ),
                                 ),
                               )
@@ -99,14 +106,5 @@ class NextLaunchWidget extends StatelessWidget {
       ),
       bottom: const PastLaunchesHeader(),
     );
-  }
-
-  String? backx = "assets/1.gif";
-  Timer? timer;
-  void backGallery(){
-     List<String> x = ["assets/1.gif", "assets/2.gif", "assets/3.gif", "assets/4.gif", "assets/5.gif"];
-     timer = Timer.periodic(const Duration(seconds: 4), (timer) {
-       final _random = Random();
-     });
   }
 }

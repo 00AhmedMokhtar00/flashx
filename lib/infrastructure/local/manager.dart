@@ -1,3 +1,5 @@
+
+import 'package:flashx/domain/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'utils.dart';
@@ -5,8 +7,10 @@ part 'keys.dart';
 
 class LocalDatabaseManager{
   static bool currentTheme = false;
-
+  static late Launch nextLaunch;
+  static late List<Launch> pastLaunches;
   static Future<void> initialLocalDatabase() async {
+
     currentTheme   = await getTheme();
   }
 

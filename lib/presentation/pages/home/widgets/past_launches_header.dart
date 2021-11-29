@@ -13,14 +13,12 @@ class PastLaunchesHeader extends StatelessWidget implements PreferredSizeWidget{
         children: const [
           Text(
             'Past Launches',
-            style: TextStyle(color: Colors.white, fontSize: 28),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 26
+            ),
           ),
           AnimatedFab()
-          // Text(
-          //   'Filter',
-          //   style: TextStyle(
-          //       color: Colors.pinkAccent, fontSize: 22),
-          // )
         ],
       ),
     );

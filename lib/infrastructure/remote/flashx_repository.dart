@@ -1,5 +1,6 @@
 import 'package:flashx/application/blocs.dart';
 import 'package:flashx/application/launch_information/launchpad/launchpad_bloc.dart';
+import 'package:flashx/infrastructure/local/manager.dart';
 import 'base_configurations/flashx_api.dart';
 import 'package:flashx/domain/models.dart';
 
@@ -23,7 +24,7 @@ class FlashXRepository{
       pastLaunchesResponseBody.map((e) => Launch.fromJson(e)).cast<Launch>().toList();
 
       pastLaunches = pastLaunches.reversed.toList();
-
+      LocalDatabaseManager.pastLaunches = pastLaunches;
       pastLaunchesState = PastLaunchesLoadedSuccessfully(pastLaunches: pastLaunches);
     }catch(errorMessage){
       pastLaunchesState = PastLaunchesLoadedFailure(errorMessage.toString());
@@ -37,7 +38,7 @@ class FlashXRepository{
       final nextLaunchResponseBody = await FlashXAPI.getNextLaunch;
 
       Launch nextLaunch = Launch.fromJson(nextLaunchResponseBody);
-
+      LocalDatabaseManager.nextLaunch = nextLaunch;
       nextLaunchState = NextLaunchLoadedSuccessfully(nextLaunch: nextLaunch);
     }catch(errorMessage){
       nextLaunchState = NextLaunchLoadedFailure(errorMessage.toString());
@@ -86,6 +87,18 @@ class FlashXRepository{
       launchPadState = LaunchPadLoadedFailure(errorMessage.toString());
     }
     return launchPadState;
+  }
+
+  Future<PastLaunchesState> getPastLaunchesFilteredByTwoDates(int fromDate, int toDate, List<Launch> pastLaunches) async{
+    PastLaunchesState pastLaunchesState;
+    try{
+      await Future.delayed(const Duration(seconds: 1));
+      List<Launch> filteredPastLaunches = pastLaunches.where((launch) => launch.date >= fromDate && launch.date <= toDate).toList();
+      pastLaunchesState = PastLaunchesFilteredSuccessfully(filteredPastLaunches: filteredPastLaunches);
+    }catch(errorMessage){
+      pastLaunchesState = PastLaunchesLoadedSuccessfully(pastLaunches: pastLaunches);
+    }
+    return pastLaunchesState;
   }
 
 }

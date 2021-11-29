@@ -22,4 +22,6 @@ class ApplicationStyles{
       topRight: Radius.circular(16.0),
       bottomRight: Radius.circular(16.0)
   );
+
+  static BoxBorder outlineBorder = Border.all(color: ApplicationColor.lightGreen);
 }

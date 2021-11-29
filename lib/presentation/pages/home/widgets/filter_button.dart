@@ -1,5 +1,10 @@
+import 'package:flashx/infrastructure/local/manager.dart';
+import 'package:flashx/presentation/theme/colors.dart';
 import 'package:flashx/presentation/theme/styles.dart';
+import 'package:flashx/presentation/theme/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../application/past_launches/past_launches_bloc.dart';
 import 'package:intl/intl.dart';
 
 class AnimatedFab extends StatefulWidget {
@@ -10,6 +15,7 @@ class AnimatedFab extends StatefulWidget {
 }
 
 class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStateMixin{
+  int fromDate = 0, toDate = 0;
   String fd1 = "", fd2 = "";
   bool centered = false;
   final double expandedWidth = 230.0;
@@ -40,7 +46,6 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return SizedBox(
         width: expandedWidth,
-        //height: expandedSize,
         child: AnimatedBuilder(
             animation: _animationController,
             builder: (BuildContext context, Widget? child) {
@@ -59,7 +64,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-          border: centered?Border.all(color: Colors.white60):null,
+          border: centered?ApplicationStyles.outlineBorder:null,
           shape: BoxShape.circle,
         color: _colorAnimation.value
       ),
@@ -70,7 +75,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
           transform: Matrix4.identity()..scale(1.0, scaleFactor),
           child: Icon(
             _animationController.value > 0.5 ? Icons.close : Icons.filter_list,
-            color: Colors.white,
+            color: ApplicationTheme.currentTheme.colorScheme.secondary,
             size: 28.0,
           ),
         ),
@@ -90,11 +95,14 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
   close() {
     if (_animationController.isCompleted) {
       _animationController.reverse();
-      setState(() {
-        centered = false;
-        fd1 = "";
-        fd2 = "";
-      });
+      centered = false;
+      fd1 = "";
+      fd2 = "";
+      PastLaunchesState pastLaunchesState = BlocProvider.of<PastLaunchesBloc>(context).state;
+      if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
+        BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesCalled());
+      }
+      setState(() {});
     }
   }
 
@@ -111,24 +119,17 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
     return Container(
       height: 40.0,
       width: size,
-      decoration: BoxDecoration(shape: BoxShape.rectangle, color: Colors.black, borderRadius: ApplicationStyles.borderRadius),
+      decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: ApplicationTheme.currentTheme.primaryColor,
+          borderRadius: ApplicationStyles.borderRadius
+      ),
       child: size > expandedWidth - hiddenWidth?
       Row(
         children: [
           Expanded(
             child: InkWell(
-              onTap: ()async{
-                  final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2006),
-                      lastDate: DateTime.now());
-                  if (picked != null) {
-                    setState(() {
-                      fd1 = DateFormat("dd MMM, yyyy").format(picked);
-                    });
-                  }
-              },
+              onTap: onFromFilterButtonTapped,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 height: double.infinity,
@@ -153,33 +154,22 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
 
           Expanded(
             child: InkWell(
-              onTap: ()async{
-                final DateTime? picked = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2006),
-                    lastDate: DateTime.now());
-                if (picked != null) {
-                  setState(() {
-                    fd2 = DateFormat("dd MMM, yyyy").format(picked);
-                  });
-                }
-              },
+              onTap: fd1.isNotEmpty?onToFilterButtonTapped:null,
               child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   height: double.infinity,
                   alignment: fd2.isNotEmpty?Alignment.centerRight:Alignment.center,
 
                   decoration: BoxDecoration(
-                      color: Colors.black,
-                      border: Border.all(color: Colors.white60),
+                      color: ApplicationTheme.currentTheme.primaryColor,
+                      border: ApplicationStyles.outlineBorder,
                       borderRadius: ApplicationStyles.rightBorderRadius
                   ),
                   child: Text(
                     fd2.isEmpty?"To":fd2,
                     style: TextStyle(
                         fontSize: fd2.isEmpty?16.0:12.0,
-                        color: Colors.white,
+                        color: ApplicationTheme.currentTheme.colorScheme.secondary,
                         fontWeight: FontWeight.bold
                     ),
                   )
@@ -189,5 +179,46 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
         ],
       ):null,
     );
+  }
+
+  onFromFilterButtonTapped()async{
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2006),
+        lastDate: DateTime.now()
+    );
+
+    if (picked != null) {
+      setState(() {
+        fromDate = picked.millisecondsSinceEpoch;
+        fd1 = DateFormat("dd MMM, yyyy").format(picked);
+        fd2 = "";
+        toDate = 0;
+      });
+    }
+  }
+
+  onToFilterButtonTapped()async{
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.fromMillisecondsSinceEpoch(fromDate),
+        lastDate: DateTime.now()
+    );
+
+    if (picked != null) {
+      toDate = picked.millisecondsSinceEpoch;
+      fd2 = DateFormat("dd MMM, yyyy").format(picked);
+
+      PastLaunchesState pastLaunchesState = BlocProvider.of<PastLaunchesBloc>(context).state;
+      if(pastLaunchesState is PastLaunchesLoadedSuccessfully){
+        BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesFilteredByTwoDates(fromDate, toDate, pastLaunchesState.pastLaunches));
+      }else if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
+        BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesFilteredByTwoDates(fromDate, toDate, LocalDatabaseManager.pastLaunches));
+      }
+
+      setState(() {});
+    }
   }
 }
