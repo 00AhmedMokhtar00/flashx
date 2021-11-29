@@ -19,6 +19,8 @@ dependencies:
   shared_preferences: ^2.0.8
   http: ^0.13.4
   flutter_countdown_timer: ^4.1.0
+  intl: ^0.17.0
+  url_launcher: ^6.0.15
   #device_preview: ^0.8.0
 
 

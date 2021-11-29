@@ -14,4 +14,12 @@ class ApplicationStyles{
   static BorderRadiusGeometry borderRadius = BorderRadius.circular(
       16.0
   );
+  static BorderRadiusGeometry leftBorderRadius = const BorderRadius.only(
+      topLeft: Radius.circular(16.0),
+      bottomLeft: Radius.circular(16.0)
+  );
+  static BorderRadiusGeometry rightBorderRadius = const BorderRadius.only(
+      topRight: Radius.circular(16.0),
+      bottomRight: Radius.circular(16.0)
+  );
 }

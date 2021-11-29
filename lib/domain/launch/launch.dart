@@ -87,6 +87,7 @@ class Launch{
   late final List<String> payloadsId;
   late final String launchpadId;
   late final int flightNumber;
+  late final String wiki;
   late final String name;
   late final String id;
 
@@ -103,6 +104,7 @@ class Launch{
     required this.payloadsId,
     required this.launchpadId,
     required this.flightNumber,
+    required this.wiki,
     required this.name,
     required this.id
 });
@@ -120,6 +122,7 @@ class Launch{
     payloadsId = json["payloads"]?.cast<String>();
     launchpadId = json["launchpad"]??"";
     flightNumber = json["flight_number"]??-1;
+    wiki = json["links"]["wikipedia"]??"";
     name = json["name"]??"";
     id = json["id"]??"";
 

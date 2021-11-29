@@ -6,11 +6,8 @@ class NextLaunchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      shape: const ContinuousRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))),
-      pinned: true,
       title: Center(child: Image.asset(PresentationAssetPath.LOGO, width: ApplicationScreenSize.widthOf(context) * 0.4)),
+      pinned: true,
       stretch: true,
       forceElevated: true,
       elevation: 4.0,
@@ -34,23 +31,24 @@ class NextLaunchWidget extends StatelessWidget {
                     children: [
                       Positioned.fill(
                         child: Image.asset(
-                          "assets/5.gif",
+                          PresentationAssetPath.BACKGROUND2_GIF,
                           fit: BoxFit.cover,
-                          color: Colors.black.withOpacity(0.4),
+                          color: Colors.black.withOpacity(0.6),
                           colorBlendMode: BlendMode.darken,
 
                         ),
                       ),
-                      Positioned.fill(
+                      Align(
+                        alignment: const Alignment(0.0, -0.4),
                         child: Opacity(
-                          opacity: 0.85,
+                          opacity: 0.7,
                           child: Image.network(
                             state.nextLaunch.largeImage,
                           ),
                         ),
                       ),
                       Align(
-                        alignment: Alignment.bottomCenter,
+                        alignment: const Alignment(0.0, 0.84),
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Row(
@@ -63,11 +61,14 @@ class NextLaunchWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const CircleAvatar(
-                                backgroundColor: Colors.pinkAccent,
-                                child: Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
+                              InkWell(
+                                onTap: () => Helpers.launchURL(state.nextLaunch.wiki),
+                                child: const CircleAvatar(
+                                  backgroundColor: Colors.pinkAccent,
+                                  child: Icon(
+                                    Icons.article_outlined,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               )
                             ],
@@ -75,7 +76,7 @@ class NextLaunchWidget extends StatelessWidget {
                         ),
                       ),
                       Align(
-                        alignment: const Alignment(-0.035,0.65),
+                        alignment: const Alignment(-0.035,0.47),
                         child: CountdownTimer(
                           endTime: state.nextLaunch.date,
                           textStyle: TextStyle(
@@ -94,7 +95,9 @@ class NextLaunchWidget extends StatelessWidget {
               }
           ),
         ),
+
       ),
+      bottom: const PastLaunchesHeader(),
     );
   }
 

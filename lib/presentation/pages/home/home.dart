@@ -25,9 +25,6 @@ class _HomeState extends State<Home> {
           physics: const BouncingScrollPhysics(),
           slivers: [
             NextLaunchWidget(),
-
-            const PastLaunchesHeader(),
-
             PastLaunchesList(),
           ],
         ),
