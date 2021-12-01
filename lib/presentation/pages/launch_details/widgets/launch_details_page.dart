@@ -1,12 +1,4 @@
-import 'package:flashx/application/blocs.dart';
-import 'package:flashx/domain/models.dart';
-import 'package:flashx/presentation/helpers/asset_paths.dart';
-import 'package:flashx/presentation/helpers/screen_size.dart';
-import 'package:flashx/presentation/theme/themes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../widgets/progress_indicators/application_progress_indicator.dart';
-import 'video_section.dart';
+part of 'widgets.dart';
 
 class LaunchDetailsPage extends StatelessWidget {
   final Launch launch;
@@ -28,10 +20,6 @@ class LaunchDetailsPage extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        // title: Image.asset(
-        //     PresentationAssetPath.LOGO,
-        //     width: ApplicationScreenSize.widthOf(context) * 0.4
-        // ),
       ),
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -51,7 +39,7 @@ class LaunchDetailsPage extends StatelessWidget {
                 SizedBox(height: ApplicationScreenSize.heightOf(context) * 0.12),
                 Hero(
                   tag: launch.id,
-                  child: Image.network(
+                  child: CachedNetworkImage(imageUrl:
                     launch.largeImage,
                     height: ApplicationScreenSize.heightOf(context) * 0.26,
                   )
@@ -121,7 +109,7 @@ class LaunchDetailsPage extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 6.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12.0),
-                                    child: Image.network(
+                                    child: CachedNetworkImage(imageUrl:
                     state.rocket.images.isEmpty?PresentationAssetPath.ROCKET_PLACEHOLDER:state.rocket.images.first,
                                       width: ApplicationScreenSize.widthOf(context) * 0.6,
                                     ),
@@ -173,7 +161,7 @@ class LaunchDetailsPage extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 6.0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12.0),
-                                      child: Image.network(
+                                      child: CachedNetworkImage(imageUrl:
                                         state.launchPad.largeImage.isEmpty?PresentationAssetPath.ROCKET_PLACEHOLDER:state.launchPad.largeImage,
                                         width: ApplicationScreenSize.widthOf(context) * 0.6,
                                       ),

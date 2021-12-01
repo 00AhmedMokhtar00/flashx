@@ -18,12 +18,7 @@ class PastLaunchesList extends StatelessWidget {
               itemBuilder: (context, index, animation) {
                 return PastLaunchItem(
                   launch: state.pastLaunches[index],
-                  onTap: () {
-                    BlocProvider.of<RocketBloc>(context).add(RocketCalled(state.pastLaunches[index].rocketId));
-                    BlocProvider.of<LaunchPadBloc>(context).add(LaunchPadCalled(state.pastLaunches[index].launchpadId));
-                    //BlocProvider.of<PayloadsBloc>(context).add(PayloadsCalled());
-                    Navigator.pushNamed(context, LaunchDetails.routeName, arguments: state.pastLaunches[index]);
-                  },
+                  onTap: () => _pastLaunchItemTapped(context, state.pastLaunches[index]),
                 );
               }
           );
@@ -34,11 +29,7 @@ class PastLaunchesList extends StatelessWidget {
               itemBuilder: (context, index, animation) {
                 return PastLaunchItem(
                   launch: state.filteredPastLaunches[index],
-                  onTap: () {
-                    BlocProvider.of<RocketBloc>(context).add(RocketCalled(state.filteredPastLaunches[index].rocketId));
-                    BlocProvider.of<LaunchPadBloc>(context).add(LaunchPadCalled(state.filteredPastLaunches[index].launchpadId));
-                    Navigator.pushNamed(context, LaunchDetails.routeName, arguments: state.filteredPastLaunches[index]);
-                  },
+                  onTap: () => _pastLaunchItemTapped(context, state.filteredPastLaunches[index]),
                 );
               }
           );
@@ -49,5 +40,11 @@ class PastLaunchesList extends StatelessWidget {
         }
       }
     );
+  }
+
+  _pastLaunchItemTapped(context, launch){
+    BlocProvider.of<RocketBloc>(context).add(RocketCalled(launch.rocketId));
+    BlocProvider.of<LaunchPadBloc>(context).add(LaunchPadCalled(launch.launchpadId));
+    Navigator.pushNamed(context, LaunchDetails.routeName, arguments: launch);
   }
 }

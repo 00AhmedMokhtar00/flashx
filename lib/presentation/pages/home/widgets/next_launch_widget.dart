@@ -49,8 +49,8 @@ class NextLaunchWidget extends StatelessWidget {
                         alignment: const Alignment(0.0, -0.4),
                         child: Opacity(
                           opacity: 0.7,
-                          child: Image.network(
-                            state.nextLaunch.largeImage,
+                          child: CachedNetworkImage(
+                            imageUrl: state.nextLaunch.largeImage,
                           ),
                         ),
                       ),

@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashx/domain/models.dart';
 import 'package:flashx/presentation/helpers/helpers.dart';
 import 'package:flashx/presentation/pages/home/widgets/filter_button.dart';

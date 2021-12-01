@@ -10,7 +10,6 @@ import '../../../theme/themes.dart';
 
 class AnimatedFab extends StatefulWidget {
   const AnimatedFab({Key? key}) : super(key: key);
-
   @override
   _AnimatedFabState createState() => _AnimatedFabState();
 }
@@ -29,7 +28,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
     super.initState();
     _animationController = AnimationController(
         vsync: this,
-        duration: const Duration(milliseconds: 250)
+        duration: const Duration(milliseconds: 300)
     );
     _colorAnimation = ColorTween(
         begin: Colors.black87,
@@ -94,7 +93,9 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
   }
 
   close() {
+    print("here?");
     if (_animationController.isCompleted) {
+      print("here???");
       _animationController.reverse();
       centered = false;
       fromDateString = "";
@@ -137,15 +138,15 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
                 alignment: fromDateString.isNotEmpty?Alignment.centerLeft:Alignment.center,
 
                 decoration: BoxDecoration(
-                  color: Colors.black,
-                  border: Border.all(color: Colors.white60),
+                  color: ApplicationTheme.currentTheme.primaryColor,
+                  border: Border.all(color: ApplicationTheme.currentTheme.colorScheme.secondary),
                   borderRadius: ApplicationStyles.leftBorderRadius
                 ),
                 child: Text(
                   fromDateString.isEmpty?"From":fromDateString,
                   style: TextStyle(
                     fontSize: fromDateString.isEmpty?16.0:12.0,
-                    color: Colors.white,
+                    color: ApplicationTheme.currentTheme.colorScheme.secondary,
                     fontWeight: FontWeight.bold
                   ),
                 )

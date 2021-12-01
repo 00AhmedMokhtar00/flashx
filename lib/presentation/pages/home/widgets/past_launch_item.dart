@@ -70,9 +70,8 @@ class PastLaunchItem extends StatelessWidget {
                       child: Card(
                         elevation: 9.0,
                         color: Colors.transparent,
-                        child: Image.network(
-                          launch.smallImage,
-                          //width: width * 0.28,
+                        child: CachedNetworkImage(
+                          imageUrl: launch.smallImage,
                           height: height * 0.8,
                           filterQuality: FilterQuality.high,
                         ),

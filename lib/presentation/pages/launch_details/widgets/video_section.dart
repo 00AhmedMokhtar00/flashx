@@ -1,7 +1,4 @@
-import 'package:flashx/presentation/theme/themes.dart';
-import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
+part of 'widgets.dart';
 class VideoSection extends StatefulWidget {
   final String videoLink;
   const VideoSection({Key? key, required this.videoLink}) : super(key: key);
