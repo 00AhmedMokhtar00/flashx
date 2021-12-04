@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _refresh()async {
-    BlocProvider.of<NextLaunchBloc>(context).add(NextLaunchCalled());
-    BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesCalled());
+    context.read<NextLaunchCubit>().callNextLaunch();
+    context.read<PastLaunchesCubit>().callPastLaunches();
   }
 }

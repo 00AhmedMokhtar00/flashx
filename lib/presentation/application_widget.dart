@@ -1,3 +1,4 @@
+import 'package:flashx/application/next_launch/next_launch_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
@@ -16,11 +17,13 @@ class ApplicationWidget extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => PastLaunchesBloc()..add(PastLaunchesCalled()),
+              create: (_) => PastLaunchesCubit()..callPastLaunches(),
               lazy: false),
+
           BlocProvider(
-              create: (_) => NextLaunchBloc()..add(NextLaunchCalled()),
+              create: (_) => NextLaunchCubit()..callNextLaunch(),
               lazy: false),
+
           BlocProvider(create: (_) => RocketBloc()),
           BlocProvider(
               create: (_) => PayloadsBloc()..add(PayloadsCalled()),

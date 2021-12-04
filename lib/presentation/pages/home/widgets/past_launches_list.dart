@@ -7,7 +7,7 @@ class PastLaunchesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PastLaunchesBloc, PastLaunchesState>(
+    return BlocBuilder<PastLaunchesCubit, PastLaunchesState>(
       builder: (context, state) {
         if(state is PastLaunchesLoading){
           return const SliverToBoxAdapter(child: Center(child: ApplicationLoader.colorApplicationLoader));

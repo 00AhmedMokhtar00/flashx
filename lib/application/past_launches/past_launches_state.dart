@@ -1,4 +1,4 @@
-part of 'past_launches_bloc.dart';
+part of 'past_launches_cubit.dart';
 
 abstract class PastLaunchesState {
   const PastLaunchesState();

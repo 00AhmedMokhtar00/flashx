@@ -7,17 +7,15 @@ part 'payload_state.dart';
 part 'payload_event.dart';
 class PayloadsBloc extends Bloc<PayloadsEvent, PayloadsState> {
   final FlashXRepository flashXRepository = FlashXRepository();
-  PayloadsBloc() : super(const PayloadsInitial());
+  PayloadsBloc() : super(const PayloadsInitial()){
+    on<PayloadsCalled>((event, emit) async{
+      emit(const PayloadsLoading());
+      emit(await flashXRepository.getPayloads);
+    });
 
-  @override
-  Stream<PayloadsState> mapEventToState(
-      PayloadsEvent event,
-      ) async* {
-    yield const PayloadsLoading();
-    if(event is PayloadsCalled){
-      yield await flashXRepository.getPayloads;
-    }else if(event is LaunchPayloadsCalled){
-      yield await flashXRepository.getLaunchPayloads(event.launch);
-    }
+    on<LaunchPayloadsCalled>((event, emit) async{
+      emit(const PayloadsLoading());
+      emit(await flashXRepository.getLaunchPayloads(event.launch));
+    });
   }
 }

@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../application/past_launches/past_launches_bloc.dart';
+import '../../../../application/past_launches/past_launches_cubit.dart';
 import '../../../../infrastructure/local/manager.dart';
 import '../../../theme/styles.dart';
 import '../../../theme/themes.dart';
@@ -93,16 +93,14 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
   }
 
   close() {
-    print("here?");
     if (_animationController.isCompleted) {
-      print("here???");
       _animationController.reverse();
       centered = false;
       fromDateString = "";
       toDateString = "";
-      PastLaunchesState pastLaunchesState = BlocProvider.of<PastLaunchesBloc>(context).state;
+      PastLaunchesState pastLaunchesState = context.read<PastLaunchesCubit>().state;
       if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
-        BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesCalled());
+        context.read<PastLaunchesCubit>().callPastLaunches();
       }
       setState(() {});
     }
@@ -213,11 +211,11 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
       toDate = picked.millisecondsSinceEpoch;
       toDateString = DateFormat("dd MMM, yyyy").format(picked);
 
-      PastLaunchesState pastLaunchesState = BlocProvider.of<PastLaunchesBloc>(context).state;
+      PastLaunchesState pastLaunchesState = context.read<PastLaunchesCubit>().state;
       if(pastLaunchesState is PastLaunchesLoadedSuccessfully){
-        BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesFilteredByTwoDates(fromDate, toDate, pastLaunchesState.pastLaunches));
+        context.read<PastLaunchesCubit>().filterPastLaunchesByTwoDates(fromDate, toDate, pastLaunchesState.pastLaunches);
       }else if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
-        BlocProvider.of<PastLaunchesBloc>(context).add(PastLaunchesFilteredByTwoDates(fromDate, toDate, LocalDatabaseManager.pastLaunches));
+        context.read<PastLaunchesCubit>().filterPastLaunchesByTwoDates(fromDate, toDate, LocalDatabaseManager.pastLaunches);
       }
 
       setState(() {});

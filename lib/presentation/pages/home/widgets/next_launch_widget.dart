@@ -29,7 +29,7 @@ class NextLaunchWidget extends StatelessWidget {
                   topRight: Radius.circular(30)
               )
           ),
-          child: BlocBuilder<NextLaunchBloc, NextLaunchState>(
+          child: BlocBuilder<NextLaunchCubit, NextLaunchState>(
               builder: (context, state) {
                 if(state is NextLaunchLoading){
                   return const Center(child: ApplicationLoader.colorApplicationLoader);
@@ -45,6 +45,7 @@ class NextLaunchWidget extends StatelessWidget {
                           colorBlendMode: BlendMode.darken,
                         ),
                       ),
+                      state.nextLaunch.largeImage.isNotEmpty?
                       Align(
                         alignment: const Alignment(0.0, -0.4),
                         child: Opacity(
@@ -53,7 +54,18 @@ class NextLaunchWidget extends StatelessWidget {
                             imageUrl: state.nextLaunch.largeImage,
                           ),
                         ),
-                      ),
+                      )
+                          :
+                      state.nextLaunch.smallImage.isNotEmpty?
+                      Align(
+                        alignment: const Alignment(0.0, -0.4),
+                        child: Opacity(
+                          opacity: 0.7,
+                          child: CachedNetworkImage(
+                            imageUrl: state.nextLaunch.smallImage,
+                          ),
+                        ),
+                      ):Container(),
                       Align(
                         alignment: const Alignment(0.0, 0.82),
                         child: Padding(

@@ -17,7 +17,7 @@ class SplashWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ApplicationTheme.currentTheme.primaryColor,
-      body: BlocListener<NextLaunchBloc, NextLaunchState>(
+      body: BlocListener<NextLaunchCubit, NextLaunchState>(
         listener: (_, state){
           if(state is !NextLaunchLoading){
             Future.delayed(const Duration(seconds: 1)).then((_) => Navigator.pushReplacementNamed(context, Home.routeName));

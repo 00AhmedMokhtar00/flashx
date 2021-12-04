@@ -1,4 +1,4 @@
-part of 'next_launch_bloc.dart';
+part of 'next_launch_cubit.dart';
 
 abstract class NextLaunchState {
   const NextLaunchState();
