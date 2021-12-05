@@ -48,7 +48,7 @@ class Launch{
     launchpadId = json["launchpad"]??"";
     flightNumber = json["flight_number"]??-1;
     wiki = json["links"]["wikipedia"]??"";
-    name = json["name"]??"";
+    name = json["name"]??"No name provided";
     id = json["id"]??"";
 
   }

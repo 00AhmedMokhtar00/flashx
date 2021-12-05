@@ -45,27 +45,29 @@ class NextLaunchWidget extends StatelessWidget {
                           colorBlendMode: BlendMode.darken,
                         ),
                       ),
-                      state.nextLaunch.largeImage.isNotEmpty?
                       Align(
                         alignment: const Alignment(0.0, -0.4),
                         child: Opacity(
                           opacity: 0.7,
-                          child: CachedNetworkImage(
-                            imageUrl: state.nextLaunch.largeImage,
+                          child: state.nextLaunch.largeImage.isNotEmpty?
+                          Image.network(state.nextLaunch.largeImage)
+                              : state.nextLaunch.smallImage.isNotEmpty?
+                          Image.network(state.nextLaunch.smallImage)
+                              :
+                          Container(
+                            width: ApplicationScreenSize.widthOf(context) * 0.5,
+                            padding: const EdgeInsets.all(35.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: ApplicationTheme.currentTheme.colorScheme.secondary.withOpacity(0.5)
+                            ),
+                            child: Image.asset(
+                                PresentationAssetPath.TEMP_MISSION,
+                            ),
                           ),
                         ),
-                      )
-                          :
-                      state.nextLaunch.smallImage.isNotEmpty?
-                      Align(
-                        alignment: const Alignment(0.0, -0.4),
-                        child: Opacity(
-                          opacity: 0.7,
-                          child: CachedNetworkImage(
-                            imageUrl: state.nextLaunch.smallImage,
-                          ),
-                        ),
-                      ):Container(),
+                      ),
+
                       Align(
                         alignment: const Alignment(0.0, 0.82),
                         child: Padding(

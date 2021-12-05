@@ -61,34 +61,30 @@ class PastLaunchItem extends StatelessWidget {
             ),
             Align(
               alignment: const Alignment(-0.9,-1.0),
-              child: Hero(
-                tag: launch.id,
-                child: Column(
-                  children: [
-                    Opacity(
+              child: Column(
+                children: [
+                  if(launch.smallImage.isNotEmpty || launch.largeImage.isNotEmpty)
+                    Hero(
+                    tag: launch.id,
+                    child: Opacity(
                       opacity: 0.7,
-                      child: Card(
-                        elevation: 9.0,
-                        color: Colors.transparent,
-                        child: CachedNetworkImage(
-                          imageUrl: launch.smallImage,
-                          height: height * 0.8,
-                          filterQuality: FilterQuality.high,
-                        ),
-                      ),
+                      child: Image.network(
+                        launch.smallImage.isNotEmpty?launch.smallImage:launch.largeImage,
+                        height: height * 0.8,
+                      )
                     ),
+                  ),
 
-                    Text(DateFormat("dd MMM, yyyy").format(
-                        DateTime.fromMillisecondsSinceEpoch(launch.date)),
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.83),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        height: 2.0
-                      ),
-                    )
-                  ],
-                ),
+                  Text(DateFormat("dd MMM, yyyy").format(
+                      DateTime.fromMillisecondsSinceEpoch(launch.date)),
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.83),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      height: 2.0
+                    ),
+                  )
+                ],
               ),
             ),
             Align(

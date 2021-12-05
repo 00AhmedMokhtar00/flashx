@@ -39,15 +39,14 @@ class LaunchDetailsPage extends StatelessWidget {
                 SizedBox(height: ApplicationScreenSize.heightOf(context) * 0.12),
                 Hero(
                   tag: launch.id,
-                  child: CachedNetworkImage(imageUrl:
-                    launch.largeImage,
+                  child: Image.asset(
+                    launch.largeImage.isNotEmpty?launch.largeImage:launch.smallImage,
                     height: ApplicationScreenSize.heightOf(context) * 0.26,
                   )
                 ),
                 spacer,
                 ExpansionTile(
                   collapsedIconColor: Colors.white,
-
                   iconColor: Colors.white,
                   childrenPadding: const EdgeInsets.symmetric(
                     horizontal: 30.0,

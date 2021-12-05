@@ -13,5 +13,7 @@ class PresentationAssetPath{
   static const String BACKGROUND2_GIF = "assets/2.gif";
   static const String BACKGROUND3_GIF = "assets/3.gif";
   static const String BACKGROUND4_GIF = "assets/4.gif";
+  static const String TEMP_MISSION = "assets/temp-mission.png";
   static const String ROCKET_PLACEHOLDER = "https://www.iconsdb.com/icons/preview/white/rocket-xxl.png";
+
 }

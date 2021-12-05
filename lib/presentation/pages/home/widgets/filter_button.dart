@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -15,6 +17,8 @@ class AnimatedFab extends StatefulWidget {
 }
 
 class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStateMixin{
+  StreamSubscription<PastLaunchesState>? _streamSubscription;
+
   int fromDate = 0, toDate = 0;
   String fromDateString = "", toDateString = "";
   bool centered = false;
@@ -26,6 +30,11 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
+    _streamSubscription = context.read<PastLaunchesCubit>().stream.listen((state) {
+      if(state is PastLaunchesLoadedSuccessfully){
+        close();
+      }
+    });
     _animationController = AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: 300)
@@ -39,6 +48,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
   @override
   void dispose() {
     _animationController.dispose();
+    _streamSubscription?.cancel();
     super.dispose();
   }
 
