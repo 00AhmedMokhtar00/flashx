@@ -16,8 +16,8 @@ abstract class BaseFlashXRepository{
 
 class FlashXRepository{
 
-  Future<PastLaunchesState> get getPastLaunches async{
-    PastLaunchesState pastLaunchesState;
+  Future<dynamic> get getPastLaunches async{
+    //PastLaunchesState pastLaunchesState;
     try{
       final pastLaunchesResponseBody = await FlashXAPI.getPastLaunches;
 
@@ -26,11 +26,13 @@ class FlashXRepository{
 
       pastLaunches = pastLaunches.reversed.toList();
       LocalDatabaseManager.pastLaunches = pastLaunches;
-      pastLaunchesState = PastLaunchesLoadedSuccessfully(pastLaunches: pastLaunches);
+      //pastLaunchesState = PastLaunchesLoadedSuccessfully(pastLaunches: pastLaunches);
+      return pastLaunches;
     }catch(errorMessage){
-      pastLaunchesState = PastLaunchesLoadedFailure(errorMessage.toString());
+      //pastLaunchesState = PastLaunchesLoadedFailure(errorMessage.toString());
+      return errorMessage.toString();
     }
-    return pastLaunchesState;
+    //return pastLaunchesState;
   }
 
   Future<NextLaunchState> get getNextLaunch async{
@@ -92,16 +94,18 @@ class FlashXRepository{
     return launchPadState;
   }
 
-  Future<PastLaunchesState> getPastLaunchesFilteredByTwoDates(int fromDate, int toDate, List<Launch> pastLaunches) async{
-    PastLaunchesState pastLaunchesState;
+  Future<dynamic> getPastLaunchesFilteredByTwoDates(int fromDate, int toDate, List<Launch> pastLaunches) async{
+    //PastLaunchesState pastLaunchesState;
     try{
       await Future.delayed(const Duration(seconds: 1));
       List<Launch> filteredPastLaunches = pastLaunches.where((launch) => launch.date >= fromDate && launch.date <= toDate).toList();
-      pastLaunchesState = PastLaunchesFilteredSuccessfully(filteredPastLaunches: filteredPastLaunches);
+      return filteredPastLaunches;
+      //pastLaunchesState = PastLaunchesFilteredSuccessfully(filteredPastLaunches: filteredPastLaunches);
     }catch(errorMessage){
-      pastLaunchesState = PastLaunchesLoadedSuccessfully(pastLaunches: pastLaunches);
+      return errorMessage.toString();
+      //pastLaunchesState = PastLaunchesLoadedSuccessfully(pastLaunches: pastLaunches);
     }
-    return pastLaunchesState;
+    //return pastLaunchesState;
   }
 
   Future<PayloadsState> getLaunchPayloads(Launch launch) async{

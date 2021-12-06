@@ -9,33 +9,38 @@ class PastLaunchesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PastLaunchesCubit, PastLaunchesState>(
       builder: (context, state) {
-        if(state is PastLaunchesLoading){
+        print("FILTERED: " + (state.filteredPastLaunches == null?"null":"not null"));
+        if(state.loading ?? false){
           return const SliverToBoxAdapter(child: Center(child: ApplicationLoader.colorApplicationLoader));
-        }else if(state is PastLaunchesLoadedSuccessfully) {
+        }
+        else if(state.pastLaunches != null && state.filteredPastLaunches == null) {
           return SliverAnimatedList(
               key: _listKey,
-              initialItemCount: state.pastLaunches.length,
+              initialItemCount: state.pastLaunches!.length,
               itemBuilder: (context, index, animation) {
                 return PastLaunchItem(
-                  launch: state.pastLaunches[index],
-                  onTap: () => _pastLaunchItemTapped(context, state.pastLaunches[index]),
+                  launch: state.pastLaunches![index],
+                  onTap: () => _pastLaunchItemTapped(context, state.pastLaunches![index]),
                 );
               }
           );
-        }else if(state is PastLaunchesFilteredSuccessfully) {
+        }
+        else if(state.filteredPastLaunches != null) {
           return SliverAnimatedList(
               key: _filteredListKey,
-              initialItemCount: state.filteredPastLaunches.length,
+              initialItemCount: state.filteredPastLaunches!.length,
               itemBuilder: (context, index, animation) {
                 return PastLaunchItem(
-                  launch: state.filteredPastLaunches[index],
-                  onTap: () => _pastLaunchItemTapped(context, state.filteredPastLaunches[index]),
+                  launch: state.filteredPastLaunches![index],
+                  onTap: () => _pastLaunchItemTapped(context, state.filteredPastLaunches![index]),
                 );
               }
           );
-        }else if(state is PastLaunchesLoadedFailure){
-          return const SliverToBoxAdapter(child: Center(child: Text("Failed!!")));
-        }else{
+        }
+        else if(state.errorMessage != null){
+          return SliverToBoxAdapter(child: Center(child: Text("Failed!! " + state.errorMessage!)));
+        }
+        else{
           return const SliverToBoxAdapter(child: Center(child: Text("UNDEFINED STATE!")));
         }
       }

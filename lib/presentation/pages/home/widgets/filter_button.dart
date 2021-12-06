@@ -31,7 +31,7 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
   void initState() {
     super.initState();
     _streamSubscription = context.read<PastLaunchesCubit>().stream.listen((state) {
-      if(state is PastLaunchesLoadedSuccessfully){
+      if(state.filteredPastLaunches == null){
         close();
       }
     });
@@ -108,10 +108,11 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
       centered = false;
       fromDateString = "";
       toDateString = "";
-      PastLaunchesState pastLaunchesState = context.read<PastLaunchesCubit>().state;
-      if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
-        context.read<PastLaunchesCubit>().callPastLaunches();
-      }
+      // PastLaunchesState pastLaunchesState = context.read<PastLaunchesCubit>().state;
+      // if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
+      //   context.read<PastLaunchesCubit>().callPastLaunches();
+      // }
+      context.read<PastLaunchesCubit>().closeFilter();
       setState(() {});
     }
   }
@@ -222,10 +223,8 @@ class _AnimatedFabState extends State<AnimatedFab> with SingleTickerProviderStat
       toDateString = DateFormat("dd MMM, yyyy").format(picked);
 
       PastLaunchesState pastLaunchesState = context.read<PastLaunchesCubit>().state;
-      if(pastLaunchesState is PastLaunchesLoadedSuccessfully){
-        context.read<PastLaunchesCubit>().filterPastLaunchesByTwoDates(fromDate, toDate, pastLaunchesState.pastLaunches);
-      }else if(pastLaunchesState is PastLaunchesFilteredSuccessfully){
-        context.read<PastLaunchesCubit>().filterPastLaunchesByTwoDates(fromDate, toDate, LocalDatabaseManager.pastLaunches);
+      if(pastLaunchesState.pastLaunches != null){
+        context.read<PastLaunchesCubit>().filterPastLaunchesByTwoDates(fromDate, toDate);
       }
 
       setState(() {});
