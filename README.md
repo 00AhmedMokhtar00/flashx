@@ -7,7 +7,7 @@
 
 
 <p float="center">
-  <img  alt="GIF" src="readme-assets/ios-emulator-showcase.gif" height="580" />
+  <img  alt="GIF" src="readme-assets/ios-emulator-showcase.gif" height="580" width="300" />
   <b style="word-space:2em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
 </p>
 
