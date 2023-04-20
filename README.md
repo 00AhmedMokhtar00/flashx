@@ -7,24 +7,23 @@
 
 
 <p float="center">
-  <img  alt="GIF" src="readme-assets/flapkap-mobile.gif" height="580" />
+  <img  alt="GIF" src="readme-assets/ios-emulator-showcase.gif" height="580" />
   <b style="word-space:2em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
-  <img  alt="GIF" src="readme-assets/flapkap-ios.gif" height="600" />
 </p>
 
 <br><br>
 
-### Running on desktop [google chrome on a macbook machine]
+### Running on android
 <br>
-<img align="center" alt="GIF" src="readme-assets/flapkap-web.gif" height="500" />
+
+<video width="320" height="240" controls>
+  <source src="readme-assets/android-showcase.mp4" type="video/mp4">
+</video>
 
 
 #### You can test it out through:
 
  - Downloading android apk from [here][apk]
- 
- - Visiting the demo website from [here][website]
 
 
-[apk]: https://drive.google.com/file/d/1-EExxuXaAfYfU_y94nQG68tM8YFogkFr/view?usp=sharing
-[website]: https://00ahmedmokhtar00.github.io/quick-challenge/
+[apk]: https://drive.google.com/file/d/1LuACmj2TtbQWU-e67zHeb1ysKC-gNCaL/view?usp=sharing
