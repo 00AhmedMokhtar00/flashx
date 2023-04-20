@@ -3,7 +3,7 @@
 ## Cross platform mobile app to get information about the next rocket launch, upcoming rocket launches and past rocket launches. SpaceX designs, manufactures and launches rockets and spacecraft.
 
   
-### Running on real android device [as an application] & ios Emulator (iphone 12 pro max)
+### Running on ios Emulator (iphone 12 pro max)
 
 
 <p float="center">
@@ -13,12 +13,7 @@
 
 <br><br>
 
-### Running on android
-<br>
 
-<video width="320" height="240" controls>
-  <source src="readme-assets/android-showcase.mp4" type="video/mp4">
-</video>
 
 
 #### You can test it out through:
